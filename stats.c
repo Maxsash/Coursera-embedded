@@ -9,13 +9,15 @@
  *
  *****************************************************************************/
 /**
- * @file <Add File Name> 
- * @brief <Add Brief Description Here >
+ * @file stats.c 
+ * @brief The main file for program that does basic operations on data array.
  *
- * <Add Extended Description Here>
+ * Contains functions that analyze an array of unsigned char data items and report array analytics on 
+ * the maximum, minimum, mean and median of the dataset. Additionally, this data is reordered from large to 
+ * small. Statistics are rounded donw to the nearest integer.
  *
- * @author <Add FirsName LastName>
- * @date <Add date >
+ * @author Yash Shrivastava
+ * @date 18th May 2020
  *
  */
 
@@ -40,4 +42,41 @@ void main() {
 
 }
 
-/* Add other Implementation File Code Here */
+void print_array(unsigned char *data, unsigned int size){
+  int i;
+  for(i=0;i<size;i++){
+    printf("%d\n", data);
+  }
+}
+
+unsigned int find_median(unsigned char *data, unsigned int size){
+  int i;
+  for(i=0;i<size;i++){
+    printf("%d\n", data);
+  }
+}
+
+unsigned int find_mean(unsigned char *data, unsigned int size){
+  int i;
+  for(i=0;i<size;i++){
+    printf("%d\n", data);
+  }
+}
+
+unsigned int find_maximum(unsigned char *data, unsigned int size){
+  int i;
+  for(i=0;i<size;i++){
+    printf("%d\n", data);
+  }
+}
+
+unsigned int find_minimum(unsigned char *data, unsigned int size){
+  int i;
+  for(i=0;i<size;i++){
+    printf("%d\n", data);
+  }
+}
+
+unsigned char sort_array(unsigned char *data, unsigned int size){
+
+}
