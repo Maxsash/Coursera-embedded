@@ -12,8 +12,8 @@
  * @file stats.h 
  * @brief Header file for array analyses
  *
- * <Add Extended Description Here>
- *
+ * This file contains all the function declarations and descriptions of functions used in the project.
+ * 
  * @author Yash Shrivastava
  * @date 18th May 2020
  *
@@ -100,8 +100,7 @@ unsigned int find_minimum(unsigned char *data, unsigned int size);
  * array sorted starting from largest value to the smallest using quick sort.
  *
  * @param data The pointer to data array
- * @param left The left index of data array for quick sort
- * @param right The right index of data array for quick sort
+ * @param size The size of the data array
  * @return NULL | The array gets sorted
  */
 void sort_array(unsigned char *data, unsigned int size);

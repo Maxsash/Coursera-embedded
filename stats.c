@@ -37,8 +37,6 @@ void main() {
                               201,   6,  12,  60,   8,   2,   5,  67,
                                 7,  87, 250, 230,  99,   3, 100,  90};
 
-  /* Other Variable Declarations Go Here */
-  /* Statistics and Printing Functions Go Here */
   print_statistics(test, SIZE);
 }
 
@@ -96,13 +94,18 @@ unsigned int find_minimum(unsigned char *data, unsigned int size){
 
 void sort_array(unsigned char *data, unsigned int size){
   //implementing reverse bubblesort
-  int i, j; 
-   for (i = 0; i < (size-1); i++)       
-  
-       // Last i elements are already in place    
-       for (j = 0; j < (size-i-1); j++)  
-           if (data[j] < data[j+1]) 
-              swap(&data[j], &data[j+1]); 
+  int i=1, j;
+  unsigned int flag = 0;
+   while (flag==0){   
+     flag =1;     
+       for (j = 0; j < (size-i); j++){ 
+           if (data[j] < data[j+1]){
+              swap(&data[j], &data[j+1]);
+              flag=0;
+           }
+       }
+       i++;
+   }
 }
 
 void swap(unsigned char *first, unsigned char *second){
