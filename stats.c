@@ -39,44 +39,75 @@ void main() {
 
   /* Other Variable Declarations Go Here */
   /* Statistics and Printing Functions Go Here */
+  print_statistics(test, SIZE);
+}
 
+void print_statistics(unsigned char *data, unsigned int size){
+  printf("\nPrinting the contents of dataset...\n\n");
+  print_array(data, SIZE);
+  printf("\nThe Median rounded off to integer is %d\n", find_median(data, SIZE));
+  printf("The Mean rounded off to integer is %d\n", find_mean(data, SIZE));
+  printf("The Maximum value is %d\n", find_maximum(data, SIZE));
+  printf("The Minimum value is %d\n", find_minimum(data, SIZE));
+  printf("\nThe sorted dataset...\n\n");
+  print_array(data, SIZE);
 }
 
 void print_array(unsigned char *data, unsigned int size){
   int i;
   for(i=0;i<size;i++){
-    printf("%d\n", data);
+    printf("Index[%d] = %d\t",i, data[i]);
+        if((i+1)%4==0){
+      printf("\n\n");
+    }
   }
 }
 
 unsigned int find_median(unsigned char *data, unsigned int size){
   int i;
-  for(i=0;i<size;i++){
-    printf("%d\n", data);
+  sort_array(data, size);
+  if(size%2!=0){
+    return data[size/2];
+  }
+  else{
+    return (data[size/2]+data[(size/2)+1])/2;
   }
 }
 
 unsigned int find_mean(unsigned char *data, unsigned int size){
-  int i;
+  int i, sum=0;
   for(i=0;i<size;i++){
-    printf("%d\n", data);
+    sum += data[i];
   }
+  return (sum/size);
 }
 
 unsigned int find_maximum(unsigned char *data, unsigned int size){
   int i;
-  for(i=0;i<size;i++){
-    printf("%d\n", data);
-  }
+  sort_array(data, size);
+  return data[0];
 }
 
 unsigned int find_minimum(unsigned char *data, unsigned int size){
   int i;
-  for(i=0;i<size;i++){
-    printf("%d\n", data);
-  }
+  sort_array(data, size);
+  return data[size-1];
 }
 
-unsigned char sort_array(unsigned char *data, unsigned int size){
+void sort_array(unsigned char *data, unsigned int size){
+  //implementing reverse bubblesort
+  int i, j; 
+   for (i = 0; i < (size-1); i++)       
+  
+       // Last i elements are already in place    
+       for (j = 0; j < (size-i-1); j++)  
+           if (data[j] < data[j+1]) 
+              swap(&data[j], &data[j+1]); 
+}
 
+void swap(unsigned char *first, unsigned char *second){
+  unsigned char temp;
+  temp = *first;
+  *first = *second;
+  *second = temp;
 }

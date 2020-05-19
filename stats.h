@@ -9,13 +9,13 @@
  *
  *****************************************************************************/
 /**
- * @file <Add File Name> 
- * @brief <Add Brief Description Here >
+ * @file stats.h 
+ * @brief Header file for array analyses
  *
  * <Add Extended Description Here>
  *
- * @author <Add FirsName LastName>
- * @date <Add date >
+ * @author Yash Shrivastava
+ * @date 18th May 2020
  *
  */
 #ifndef __STATS_H__
@@ -94,15 +94,27 @@ unsigned int find_maximum(unsigned char *data, unsigned int size);
 unsigned int find_minimum(unsigned char *data, unsigned int size);
 
 /**
- * @brief Given an array of data and a length, sorts the array from largest to smallest.
+ * @brief Given an array of data with right and left indices, sorts the array from largest to smallest.
  *
  * This function takes as an input a pointer to the data array and size of the array and returns an
- * array sorted starting from largest value to the smallest.
+ * array sorted starting from largest value to the smallest using quick sort.
  *
  * @param data The pointer to data array
- * @param size The size of the data array
- * @return The minimum value calculated from the array
+ * @param left The left index of data array for quick sort
+ * @param right The right index of data array for quick sort
+ * @return NULL | The array gets sorted
  */
-unsigned char sort_array(unsigned char *data, unsigned int size);
+void sort_array(unsigned char *data, unsigned int size);
+
+/**
+ * @brief Given two pointers, swaps their values.
+ *
+ * This function takes as an input two pointers and uses a temporary variable to swap their values.
+ *
+ * @param first The pointer to data array
+ * @param second The left index of data array for quick sort
+ * @return NULL | changes made from pointers.
+ */
+void swap(unsigned char *first, unsigned char *second);
 
 #endif /* __STATS_H__ */
