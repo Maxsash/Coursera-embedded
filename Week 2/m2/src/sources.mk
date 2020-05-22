@@ -9,9 +9,19 @@
 #
 #*****************************************************************************
 
-# Add your Source files to this variable
-SOURCES =
+# Common source files
+COMSRC = main.c memory.c
+# Platform specific source files
+MSPSRC = interrupts_msp432p401r_gcc.c startup_msp432p401r_gcc.c system_msp432p401r.c
 
-# Add your include paths to this variable
-INCLUDES = 
+ifeq ($(PLATFORM),MSP432)
+	SOURCES =	$(COMSRC) $(MSPSRC)
+else
+	SOURCES =	$(COMSRC)
+endif
 
+#Include paths
+INCLUDES =	\
+	-I../include/CMSIS \
+	-I../include/common \
+	-I../include/msp432
