@@ -9,15 +9,18 @@
 #
 #*****************************************************************************
 
-# Common source files
-COMSRC = main.c memory.c
-# Platform specific source files
-MSPSRC = interrupts_msp432p401r_gcc.c startup_msp432p401r_gcc.c system_msp432p401r.c
-
+#Conditional statement for SOURCES
+ 
 ifeq ($(PLATFORM),MSP432)
-	SOURCES =	$(COMSRC) $(MSPSRC)
+	SOURCES =	\
+	main.c \
+	memory.c \
+	interrupts_msp432p401r_gcc.c \
+	startup_msp432p401r_gcc.c system_msp432p401r.c
 else
-	SOURCES =	$(COMSRC)
+	SOURCES =	\
+	main.c \
+	memory.c
 endif
 
 #Include paths
