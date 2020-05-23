@@ -52,7 +52,7 @@ ifeq ($(PLATFORM),MSP432)
 	FPUARCH = -mfpu=fpv4-sp-d16
 
 	#Platform specific flags for only the cross-compiler
-	LINKER_FILE = -T ../msp432p401r.lds
+	LINKER_FILE = -T msp432p401r.lds
 
 	#Extension for the cross-compiler
 	EXT = arm-none-eabi-

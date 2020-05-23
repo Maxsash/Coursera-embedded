@@ -13,18 +13,18 @@
  
 ifeq ($(PLATFORM),MSP432)
 	SOURCES =	\
-	main.c \
-	memory.c \
-	interrupts_msp432p401r_gcc.c \
-	startup_msp432p401r_gcc.c system_msp432p401r.c
+	./src/main.c \
+	./src/memory.c \
+	./src/interrupts_msp432p401r_gcc.c \
+	./src/startup_msp432p401r_gcc.c system_msp432p401r.c
 else
 	SOURCES =	\
-	main.c \
-	memory.c
+	./src/main.c \
+	./src/memory.c
 endif
 
 #Include paths
 INCLUDES =	\
-	-I../include/CMSIS \
-	-I../include/common \
-	-I../include/msp432
+	-I./include/CMSIS \
+	-I./include/common \
+	-I./include/msp432
