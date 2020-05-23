@@ -32,38 +32,45 @@
 #------------------------------------------------------------------------------
 include sources.mk
 
-#Set default value of PLATFORM to HOST
+#Set default value of PLATFORM to HOST if it is not defined
 ifndef PLATFORM
 PLATFORM=HOST
 endif
 
-#Common flags for both platforms
 TARGET = c1m2
-LINKER_FILE = ../msp432p401r.lds
-CFLAGS = -Wall -Werror -g -O0 -std=c99 -MD
+
+#Common platform c-flags
+CFLAGS = -Wall -Werror -g -O0 -std=c99
 CPPFLAGS = $(INCLUDES)
-LDFLAGS = -Wl,-Map=$(TARGET).map -T $(LINKER_FILE)
 
-# Architectures Specific Flags
-CPU = -mcpu=cortex-m4
-ARCH = -march=armv7e-m -mthumb
-SPECS = --specs=nosys.specs
-FPABI = -mfloat-abi=hard
-FPUARCH = -mfpu=fpv4-sp-d16
-
-# PLatform Specific Flags
 ifeq ($(PLATFORM),MSP432)
+	#Architecture specific flags for only the cross-compiler
+	CPU = -mcpu=cortex-m4
+	ARCH = -march=armv7e-m -mthumb
+	SPECS = --specs=nosys.specs
+	FPABI = -mfloat-abi=hard
+	FPUARCH = -mfpu=fpv4-sp-d16
+
+	#Platform specific flags for only the cross-compiler
+	LINKER_FILE = -T ../msp432p401r.lds
+
+	#Extension for the cross-compiler
 	EXT = arm-none-eabi-
+	#Combining all the flags together
 	ARMFLAGS = $(CPU) $(ARCH) $(SPECS) $(FLOATABI) $(FPUARCH)
 endif
 
-#Compiler and linker
-CC = $(EXT)gcc
-LD = $(EXT)ld
+#Common flags for both platforms
+LDFLAGS = -Wl,-Map=$(TARGET).map $(LINKER_FILE)
 
+#Compiler
+CC = $(EXT)gcc
 
 #Rules
 OBJS = $(SOURCES:.c=.o)
+DEPS = $(SOURCES:.c=.d)
+ASMS = $(SOURCES:.c=.asm)
+PREP = $(SOURCES:.c=.i)
 
 %.o : %.c
 	$(CC) -c $< $(CFLAGS) $(CPPFLAGS) -o $@ $(ARMFLAGS) -D$(PLATFORM)
@@ -74,20 +81,20 @@ OBJS = $(SOURCES:.c=.o)
 %.asm : %.c $(TARGET).out
 	$(CC) -S $< $(CFLAGS) $(CPPFLAGS) -o $@ $(ARMFLAGS) -D$(PLATFORM)
 	$(EXT)objdump --disassemble-all $(TARGET).out > $(TARGET).asm
+
+%.d: %.c
+	$(CC) -E -M $< $(CPPFLAGS) -o $@ -D$(PLATFORM)
 	
 .PHONY: compile-all
 compile-all: $(OBJS)
 
 .PHONY: build
-build: all
+build: $(TARGET).out
 
-.PHONY: all
-all: $(TARGET).out
-
-$(TARGET).out: $(OBJS)
+$(TARGET).out: $(OBJS) $(DEPS)
 	$(CC) $(CPPFLAGs) $(OBJS) $(CFLAGS) -o $@ $(LDFLAGS) $(ARMFLAGS)
 	size $@
 
 .PHONY: clean
 clean:
-	rm -f *.o $(TARGET).out $(TARGET).map *.asm *.i *.d
+	rm -f $(OBJS) $(DEPS) $(ASMS) $(PREP) $(TARGET).out $(TARGET).map
