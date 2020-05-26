@@ -25,44 +25,34 @@
 
 #include <stdio.h>
 #include "stats.h"
+#include "platform.h"
 
 /* Size of the Data Set */
 #define SIZE (40)
 
-void main() {
-
-  unsigned char test[SIZE] = { 34, 201, 190, 154,   8, 194,   2,   6,
-                              114, 88,   45,  76, 123,  87,  25,  23,
-                              200, 122, 150, 90,   92,  87, 177, 244,
-                              201,   6,  12,  60,   8,   2,   5,  67,
-                                7,  87, 250, 230,  99,   3, 100,  90};
-
-  print_statistics(test, SIZE);
-}
-
 void print_statistics(unsigned char *data, unsigned int size){
-  printf("\nPrinting the contents of dataset...\n\n");
-  print_array(data, SIZE);
   printf("\nThe Median rounded off to integer is %d\n", find_median(data, SIZE));
   printf("The Mean rounded off to integer is %d\n", find_mean(data, SIZE));
   printf("The Maximum value is %d\n", find_maximum(data, SIZE));
   printf("The Minimum value is %d\n", find_minimum(data, SIZE));
-  printf("\nThe sorted dataset...\n\n");
-  print_array(data, SIZE);
 }
 
 void print_array(unsigned char *data, unsigned int size){
+  //Required compile time switch
+  #ifdef VERBOSE
   int i;
+  PRINTF("------------------------------\n");
   for(i=0;i<size;i++){
-    printf("Index[%d] = %d\t",i, data[i]);
+    PRINTF("Index[%d] = %d\t",i, data[i]);
         if((i+1)%4==0){
       printf("\n\n");
     }
   }
+  PRINTF("------------------------------\n");
+  #endif
 }
 
 unsigned int find_median(unsigned char *data, unsigned int size){
-  int i;
   sort_array(data, size);
   if(size%2!=0){
     return data[size/2];
@@ -81,13 +71,11 @@ unsigned int find_mean(unsigned char *data, unsigned int size){
 }
 
 unsigned int find_maximum(unsigned char *data, unsigned int size){
-  int i;
   sort_array(data, size);
   return data[0];
 }
 
 unsigned int find_minimum(unsigned char *data, unsigned int size){
-  int i;
   sort_array(data, size);
   return data[size-1];
 }

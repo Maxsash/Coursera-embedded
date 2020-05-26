@@ -23,6 +23,8 @@
 #include "memory.h"
 #include "data.h"
 #include "stats.h"
+#define BASE_16 (16)
+#define BASE_10 (10)
 
 int8_t test_data1() {
   uint8_t * ptr;
@@ -38,8 +40,8 @@ int8_t test_data1() {
     return TEST_ERROR;
   }
 
-  digits = my_itoa( num, ptr, BASE_16);   
-  value = my_atoi( ptr, digits, BASE_16);
+  digits = my_itoa(num, ptr, BASE_16);   
+  value = my_atoi(ptr, digits, BASE_16);
   #ifdef VERBOSE
   PRINTF("  Initial number: %d\n", num);
   PRINTF("  Final Decimal number: %d\n", value);
@@ -95,6 +97,7 @@ int8_t test_memmove1() {
   if (! set ) 
   {
     return TEST_ERROR;
+	  PRINTF("fail to reserve\n");
   }
   
   ptra = &set[0];
@@ -115,6 +118,7 @@ int8_t test_memmove1() {
     if (set[i + 16] != i)
     {
       ret = TEST_ERROR;
+	  PRINTF("%d and %d\n", set[i + 16], i);
     }
   }
 
@@ -153,6 +157,7 @@ int8_t test_memmove2() {
     if (set[i + 8] != i)
     {
       ret = TEST_ERROR;
+	  PRINTF("%d and %d\n", set[i + 8], i);
     }
   }
 
@@ -192,6 +197,7 @@ int8_t test_memmove3() {
     if (set[i] != (i + 8))
     {
       ret = TEST_ERROR;
+	  PRINTF("%d and %d\n", set[i], (i+8));
     }
   }
 
@@ -232,6 +238,7 @@ int8_t test_memcopy() {
     if (set[i+16] != i)
     {
       ret = TEST_ERROR;
+	  PRINTF("%d and %d\n", set[i + 16], i);
     }
   }
 
@@ -278,6 +285,7 @@ int8_t test_memset()
     if (set[16 + i] != 0)
     {
       ret = TEST_ERROR;
+	  PRINTF("%d and 0\n", set[i + 16]);
     }
   }
   
@@ -314,6 +322,7 @@ int8_t test_reverse()
     if (set[i] != copy[MEM_SET_SIZE_B - i - 1])
     {
       ret = TEST_ERROR;
+	  PRINTF("%d and %d\n", set[i], copy[MEM_SET_SIZE_B - i - 1]);
     }
   }
 

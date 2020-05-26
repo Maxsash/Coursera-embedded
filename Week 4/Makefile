@@ -37,10 +37,12 @@ ifndef PLATFORM
 PLATFORM=HOST
 endif
 
-TARGET = c1m2
+TARGET = course1
 
 #Common platform c-flags
-CFLAGS = -Wall -Werror -g -O0 -std=c99
+CFLAGS = -Wall -Werror -g -O0 -std=c99 $(MODE) $(PRINT)
+#MODE has a valid value -DCOURSE1 and PRINT has a valid value -DVERBOSE
+
 CPPFLAGS = $(INCLUDES)
 
 ifeq ($(PLATFORM),MSP432)
@@ -73,7 +75,7 @@ ASMS = $(SOURCES:.c=.asm)
 PREP = $(SOURCES:.c=.i)
 
 %.o : %.c
-	$(CC) -c $< $(CFLAGS) $(CPPFLAGS) -o $@ $(ARMFLAGS) -D$(PLATFORM)
+	$(CC) -c $< $(CFLAGS) $(CPPFLAGS) -o $@ $(ARMFLAGS) -D$(PLATFORM) 
 	
 %.i : %.c
 	$(CC) -E $< $(CFLAGS) $(CPPFLAGS) -o $@ $(ARMFLAGS) -D$(PLATFORM)

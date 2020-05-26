@@ -1,5 +1,13 @@
 Author - Yash Shrivastava
 
-Repository created for the completion of Week 1 Application Assignment of 'Introduction to Embedded Systems Software and Development" on Coursera.
+Repository created for the completion of Final Assessment of 'Introduction to Embedded Systems Software and Development" on Coursera.
 
-The print_statistics() function prints out all the requirements for the projects. In addition to the functions required for the projects, a swap function is implemented as well for help with sorting. 
+Usage:
+
+$make build : will compile and link the program. The output file will not display anything.
+
+OPTIONAL FLAGS:
+
+MODE=-DCOURSE1 : This will switch the required compile time switch in main.c
+
+PRINT=-DVERBOSE : This will switch the required compile time switch in stats.c (print_array)

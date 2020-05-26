@@ -19,6 +19,8 @@
  * @date April 1 2017
  *
  */
+#include <stdint.h>
+#include <stddef.h>
 #ifndef __MEMORY_H__
 #define __MEMORY_H__
 
@@ -34,7 +36,7 @@
  *
  * @return void.
  */
-void set_value(char * ptr, unsigned int index, char value);
+void set_value(unsigned char * ptr, unsigned int index, unsigned char value);
 
 /**
  * @brief Clear a value of a data array 
@@ -47,7 +49,7 @@ void set_value(char * ptr, unsigned int index, char value);
  *
  * @return void.
  */
-void clear_value(char * ptr, unsigned int index);
+void clear_value(unsigned char * ptr, unsigned int index);
 
 /**
  * @brief Returns a value of a data array 
@@ -60,7 +62,7 @@ void clear_value(char * ptr, unsigned int index);
  *
  * @return Value to be read.
  */
-char get_value(char * ptr, unsigned int index);
+unsigned char get_value(unsigned char * ptr, unsigned int index);
 
 /**
  * @brief Sets data array elements to a value
@@ -75,7 +77,7 @@ char get_value(char * ptr, unsigned int index);
  *
  * @return void.
  */
-void set_all(char * ptr, char value, unsigned int size);
+void set_all(unsigned char * ptr, unsigned char value, unsigned int size);
 
 /**
  * @brief Clears elements in a data array
@@ -88,6 +90,97 @@ void set_all(char * ptr, char value, unsigned int size);
  *
  * @return void.
  */
-void clear_all(char * ptr, unsigned int size);
+void clear_all(unsigned char * ptr, unsigned int size);
+
+/**
+ * @brief Moves data in memory
+ *
+ * This function takes two byte pointers (one source and one destination)
+ * and a length of bytes to move from the source location to the destination.
+ *
+ * @param src Pointer to source data array
+ * @param dst Pointer to destination data array
+ * @param length Number of elements in data array
+ *
+ * @return Pointer to the destination(dst) 
+ */
+uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length);
+
+/**
+ * @brief Copies data in memory
+ *
+ * This function takes two byte pointers (one source and one destination)
+ * and a length of bytes to copy from the source location to the destination.
+ *
+ * @param src Pointer to source data array
+ * @param dst Pointer to destination data array
+ * @param length Number of elements in data array
+ *
+ * @return Pointer to the destination(dst) 
+ */
+uint8_t * my_memcopy(uint8_t * src, uint8_t * dst, size_t length);
+
+/**
+ * @brief Set all locations to given value
+ *
+ * This should take a pointer to a source memory location,
+ * a length in bytes and set all locations of that memory to a given value.
+ *
+ * @param src Pointer to source data array
+ * @param length Number of elements in data array
+ * @paran value The value to set memory locations to.
+ *
+ * @return Pointer to the source(src) 
+ */
+uint8_t * my_memset(uint8_t * src, size_t length, uint8_t value);
+
+/**
+ * @brief Set all locations zero
+ *
+ * This should take a pointer to a source memory location,
+ * a length in bytes and zero out all of the memory.
+ *
+ * @param src Pointer to source data array
+ * @param length Number of elements in data array
+ *
+ * @return Pointer to the source(src) 
+ */
+uint8_t * my_memzero(uint8_t * src, size_t length);
+
+/**
+ * @brief Reverse the order of data
+ *
+ * This should take a pointer to a memory location and a length in bytes
+ * and reverse the order of all of the bytes.
+ *
+ * @param src Pointer to source data array
+ * @param length Number of elements in data array
+ *
+ * @return Pointer to the source(src) 
+ */
+uint8_t * my_reverse(uint8_t * src, size_t length);
+
+/**
+ * @brief Reserves memory
+ *
+ * This should take number of words to allocate in dynamic memory
+ *
+ * @param length Number of words to allocate in dynamic memory
+ *
+ * @return Pointer to memory if successful, NULL if unsuccessful
+ */
+int32_t * reserve_words(size_t length);
+
+/**
+ * @brief Free memory
+ *
+ * Should free a dynamic memory allocation by providing the pointer
+ * src to the function
+ *
+ * @param src Pointer to source data array
+ *
+ * @return void
+ */
+void free_words(uint32_t * src);
 
 #endif /* __MEMORY_H__ */
